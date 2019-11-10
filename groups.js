@@ -43,7 +43,7 @@ function createGroup(userID, eventID) {
 
   // generate a group id until you get a unique one
   do {
-    group.id = genGroupID();
+    group.id = genGroupID().toString();
   } while(groupDB.has(group.id));
 
   groupDB.set(group.id, group);

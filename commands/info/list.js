@@ -1,6 +1,6 @@
 // ./commands/info/list.js
 const { Command } = require('discord.js-commando');
-
+const info = require('../../info.js');
 
 class ListInfoCommand extends Command {
   constructor(client) {
@@ -13,8 +13,14 @@ class ListInfoCommand extends Command {
     });
   }
 
-  async run(msg, args) {
-    return 'not implemented';
+  async run(msg) {
+    let listString = 'Info topics: \n';
+    for (let topic of info.list()) {
+      listString += ' - ' + topic;
+    }
+    msg.reply(listString, {
+      code: true,
+    });
   }
 }
 

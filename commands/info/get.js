@@ -1,11 +1,11 @@
 // ./commands/info/getInfo.js
 const { Command } = require('discord.js-commando');
-
+const info = require('../../info.js');
 
 class GetInfoCommand extends Command {
   constructor(client) {
     super(client, {
-      name: 'info',
+      name: 'info-get',
       group: 'info',
       memberName:'get',
       description: 'Get information about the event.',
@@ -26,7 +26,7 @@ class GetInfoCommand extends Command {
   }
 
   async run(msg, args) {
-    msg.reply(msg.guild.settings.get(args.key));
+    msg.reply(info.get(args.key));
   }
 }
 

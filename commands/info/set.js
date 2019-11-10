@@ -1,6 +1,6 @@
 // ./commands/info/setInfo.js
 const { Command } = require('discord.js-commando');
-
+const info = require('../../info.js');
 
 class SetInfoCommand extends Command {
   constructor(client) {
@@ -26,9 +26,9 @@ class SetInfoCommand extends Command {
 
   async run(msg, args) {
     if (args.value === '-1') {
-      msg.guild.settings.remove(`info-${args.topic}`);
+      info.delete(`info-${args.topic}`);
     } else {
-      msg.guild.settings.set(args.topic, args.value);
+      info.set(args.topic, args.value);
     }
   }
 }
