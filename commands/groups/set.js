@@ -22,10 +22,12 @@ class GroupSetCommand extends Command {
             'description',
             'repo',
           ],
+          type: 'string',
         },
         {
           key: 'value',
           prompt: 'The value to set the property to',
+          type: 'string',
         },
       ],
     });

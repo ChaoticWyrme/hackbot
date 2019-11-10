@@ -5,9 +5,9 @@ const groups = require('../../groups.js');
 class ClearUsersCommand extends Command {
   constructor(client) {
     super(client, {
-      name: 'clearUsers',
+      name: 'clear-users',
       group: 'admin',
-      memberName:'clearUsers',
+      memberName:'clear-users',
       description: 'Clear the database of user->group data, allowing all users to create/join a new group, but invalidating the old group.',
     });
   }

@@ -6,13 +6,13 @@ const groups = require('../../groups.js');
 class EventIDCommand extends Command {
   constructor(client) {
     super(client, {
-      name: 'eventID',
+      name: 'event-id',
       group: 'admin',
-      memberName:'eventID',
+      memberName:'event-id',
       description: 'Get or set the event id. DANGEROUS.',
       args: [
         {
-          id: 'action',
+          key: 'action',
           prompt: 'Action to take',
           oneOf: [
             'get',
@@ -20,11 +20,13 @@ class EventIDCommand extends Command {
             'change',
           ],
           default: 'get',
+          type: 'string',
         },
         {
-          id: 'newID',
+          key: 'newID',
           prompt: 'newID',
           default: '',
+          type: 'string',
         },
       ],
       examples: [
@@ -47,19 +49,21 @@ class EventIDCommand extends Command {
       msg.reply('Please provide a new event ID');
       return;
     }
-    let oldID = msg.guild.settings.get('eventID');
+    let oldID = msg.guild.settings.get('eventID') || 'not defined';
     switch (args.action) {
       case 'get':
-        msg.reply(`EventID is ${oldID}}`);
+        msg.reply(`EventID is ${oldID}.`);
         break;
       case 'set':
         msg.guild.settings.set('eventID', args.newID);
         msg.reply(`Event ID set. You may want to run the archive command with the old event ID(${oldID}) and the clearUsers command to clear the user->team pairings.`);
+        console.log(`Event ID set to ${args.newID}.`);
         break;
       case 'change':
         msg.guild.settings.set('eventID', args.newID);
         groups.changeEventID(args.newID);
         msg.reply('Event ID changed.');
+        console.log(`Event ID changed to ${args.newID}`);
         break;
     }
   }

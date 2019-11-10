@@ -1,5 +1,6 @@
 const { Client, SyncSQLiteProvider } = require('discord.js-commando');
 const path = require('path');
+require('dotenv').config();
 
 const client = new Client({
   owner: '171043851178475520',

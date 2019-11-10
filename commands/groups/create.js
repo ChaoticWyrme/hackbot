@@ -20,7 +20,11 @@ class CreateGroupCommand extends Command {
   }
 
   async run(msg) {
-    groups.createGroup(msg.member.id, msg.guild.settings.get('eventID'));
+    let id = groups.createGroup(msg.member.id, msg.guild.settings.get('eventID'));
+    msg.author.createDM().then(channel => {
+      channel.send(`Group created, anyone can join with the code ${id}, unless you set a password.`);
+      msg.reply('Group created, join id sent to you.');
+    });
   }
 }
 

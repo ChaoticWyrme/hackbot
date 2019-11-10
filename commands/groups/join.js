@@ -12,12 +12,15 @@ class JoinGroupCommand extends Command {
       args: [
         {
           key: 'groupID',
+          type: 'integer',
           validate: group => {
             groups.groupExists(group) ? true : 'Group does not exist';
           },
+          prompt: 'Group ID',
         },
         {
           key: 'pass',
+          type: 'string',
           label: 'Password',
           prompt: 'Password for group, optional',
           default: false,

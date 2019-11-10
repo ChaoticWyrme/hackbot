@@ -5,9 +5,9 @@ const { Command } = require('discord.js-commando');
 class ListInfoCommand extends Command {
   constructor(client) {
     super(client, {
-      name: 'listInfo',
+      name: 'list-info',
       group: 'info',
-      memberName:'listInfo',
+      memberName:'list',
       description: 'Lists the available info topics.',
       guildOnly: true,
     });

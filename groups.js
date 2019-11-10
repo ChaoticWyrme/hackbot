@@ -86,16 +86,22 @@ function getGroupID(userID) {
 // if they are the owner and the last member, delete the group instead
 // if they are the owner and not the last member, throw an error
 function deleteUser(userID) {
-  let group = groupDB.get(userDB.get(userID));
-  if (group.owner === userID) {
-    if (group.users.length > 1) {
-      return 'The creator cannot leave the group unless they are the last member';
-    } else {
-      return deleteGroup(group.id);
+  try {
+    let group = groupDB.get(userDB.get(userID));
+    if (group.owner === userID) {
+      if (group.users.length > 1) {
+        return 'The creator cannot leave the group unless they are the last member';
+      } else {
+        return deleteGroup(group.id);
+      }
     }
+    groupDB.remove(group.id, userID, 'users');
+    userDB.delete(userID);
+    return 'User removed from group';
+  } catch(err) {
+    userDB.delete(userID);
+    return 'User removed from group';
   }
-  groupDB.remove(group.id, userID, 'users');
-  return 'User removed from group';
 }
 
 function deleteGroup(groupID) {
@@ -105,7 +111,7 @@ function deleteGroup(groupID) {
   }
   groupDB.delete(groupID);
   if (users.length === 1) {
-    deleteUser(users[0]);
+    userDB.remove(users[0]);
   }
 }
 
@@ -167,4 +173,5 @@ module.exports = {
   selectAllEvents,
   archiveEvent,
   clearUserDB,
+  changeEventID,
 };

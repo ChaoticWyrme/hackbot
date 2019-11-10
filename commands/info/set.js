@@ -5,7 +5,7 @@ const { Command } = require('discord.js-commando');
 class SetInfoCommand extends Command {
   constructor(client) {
     super(client, {
-      name: 'setInfo',
+      name: 'set-info',
       group: 'info',
       memberName:'set',
       description: 'Set an info key',
@@ -13,10 +13,12 @@ class SetInfoCommand extends Command {
         {
           key: 'topic',
           prompt: 'The topic of the information.',
+          type: 'string',
         },
         {
           key: 'value',
           prompt: 'The info message',
+          type: 'string',
         },
       ],
     });

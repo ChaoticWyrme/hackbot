@@ -13,10 +13,12 @@ class GetInfoCommand extends Command {
         {
           key: 'key',
           label: 'topic',
+          type: 'string',
           validate: (key, msg) => {
             return (typeof msg.guild.settings.get(`info-${key}`) === 'string') ?
               true : 'There is no info on this topic';
           },
+          prompt: 'Topic to get information about.',
         },
       ],
       guildOnly: true,
